@@ -1,5 +1,6 @@
 import sys
 import os
+import subprocess
 
 # pipeline modules are using relative importing
 # so using sys.path hack here
@@ -10,13 +11,12 @@ sys.path.append(os.path.dirname(scripts.__file__))
 # this way users can see function args by py.help in matlab
 from ecephys_spike_sorting.scripts.create_input_json import createInputJson
 
-from ecephys_spike_sorting.scripts.helpers.SpikeGLX_utils import ParseProbeStr, ParseTrigStr
+## uncomment if needs to run legacy_launch.m
+# from ecephys_spike_sorting.scripts.helpers.SpikeGLX_utils import ParseProbeStr, ParseTrigStr
+# from ecephys_spike_sorting.scripts.helpers.run_one_probe import runOne
+# from ecephys_spike_sorting.scripts.helpers.log_from_json import writeHeader
 
-from ecephys_spike_sorting.scripts.helpers.run_one_probe import runOne
-from ecephys_spike_sorting.scripts.helpers.log_from_json import writeHeader
+def call_python(params):
+    command = sys.executable + ' ' + params
+    subprocess.check_call(command.split(' '))
 
-def call_helper():
-    """
-        TODO - Calling ecephys_spike_sorting.scripts.helpers.*
-    """
-    print("call_helper")
